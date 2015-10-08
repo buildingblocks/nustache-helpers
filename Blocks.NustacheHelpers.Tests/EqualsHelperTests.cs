@@ -143,6 +143,18 @@ namespace Blocks.NustacheHelpers.Tests
             result.Should().Be("not equal");
         }
 
+        [Test, Category("if_eq")]
+        public void IfEqHelper_renders_inverse_with_null_target_and_null_comperand()
+        {
+            object one = null;
+            object two = null;
+
+            var result = Render.StringToString("{{#if_eq one compare=two}}equal{{else}}not equal{{/if_eq}}",
+                                               new { one, two });
+
+            result.Should().Be("equal");
+        }
+
         [Test, Category("unless_eq")]
         public void UnlessEqHelper_renders_expected_result_with_equal_objects()
         {
@@ -257,6 +269,17 @@ namespace Blocks.NustacheHelpers.Tests
             var result = Render.StringToString("{{#unless_eq one compare=two}}not equal{{/unless_eq}}", new { one, two });
 
             result.Should().Be("not equal");
+        }
+
+        [Test, Category("unless_eq")]
+        public void UnlessEqHelper_renders_expected_result_with_null_target_and_null_comperand()
+        {
+            object one = null;
+            object two = null;
+
+            var result = Render.StringToString("{{#unless_eq one compare=two}}not equal{{/unless_eq}}", new { one, two });
+
+            result.Should().BeEmpty();
         }
 
         [Test, Category("unless_eq")]
