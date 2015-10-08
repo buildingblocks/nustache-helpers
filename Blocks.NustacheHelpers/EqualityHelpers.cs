@@ -45,6 +45,11 @@ namespace Blocks.NustacheHelpers
         internal static void IfEqHelper(RenderContext ctx, IList<object> args, IDictionary<string, object> options,
                                         RenderBlock fn, RenderBlock inverse)
         {
+            if (args[0] == null)
+            {
+                inverse(args[0]);
+                return;
+            }
             if (args[0].Equals(options["compare"]))
                 fn(args[0]);
             else
@@ -57,6 +62,12 @@ namespace Blocks.NustacheHelpers
         internal static void UnlessEqHelper(RenderContext ctx, IList<object> args, IDictionary<string, object> options,
                                             RenderBlock fn, RenderBlock inverse)
         {
+            if (args[0] == null)
+            {
+                fn(args[0]);
+                return;
+            }
+
             if (args[0].Equals(options["compare"]))
                 inverse(args[0]);
             else
