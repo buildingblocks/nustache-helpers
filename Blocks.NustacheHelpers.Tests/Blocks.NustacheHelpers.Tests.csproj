@@ -39,6 +39,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NUnit.2.6.2\lib\nunit.framework.dll</HintPath>
     </Reference>
+    <Reference Include="Nustache.Core">
+      <HintPath>..\packages\Nustache.1.15.3.5\lib\net20\Nustache.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="Microsoft.CSharp" />
@@ -58,10 +61,6 @@
     <ProjectReference Include="..\Blocks.NustacheHelpers\Blocks.NustacheHelpers.csproj">
       <Project>{9655265d-8dda-409f-8f81-9cd91fbee387}</Project>
       <Name>Blocks.NustacheHelpers</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Nustache\Nustache.Core\Nustache.Core.csproj">
-      <Project>{3a725cd9-6024-441f-84b5-4226d78352c5}</Project>
-      <Name>Nustache.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

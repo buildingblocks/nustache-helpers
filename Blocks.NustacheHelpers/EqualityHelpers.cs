@@ -11,8 +11,14 @@ namespace Blocks.NustacheHelpers
             if (!Helpers.Contains("if_eq"))
                 Helpers.Register("if_eq", IfEqHelper);
 
+            if (!Helpers.Contains("if_eq_zero"))
+                Helpers.Register("if_eq_zero", IfEqZeroHelper);
+
             if (!Helpers.Contains("unless_eq"))
                 Helpers.Register("unless_eq", UnlessEqHelper);
+
+            if (!Helpers.Contains("unless_eq_zero"))
+                Helpers.Register("unless_eq_zero", UnlessEqZeroHelper);
 
             if (!Helpers.Contains("if_gt"))
                 Helpers.Register("if_gt", IfGtHelper);
@@ -45,10 +51,57 @@ namespace Blocks.NustacheHelpers
         internal static void IfEqHelper(RenderContext ctx, IList<object> args, IDictionary<string, object> options,
                                         RenderBlock fn, RenderBlock inverse)
         {
-            if (args[0].Equals(options["compare"]))
+            if (Object.Equals(args[0], options["compare"]))
                 fn(args[0]);
             else
                 inverse(args[0]);
+        }
+
+        /// <summary>
+        /// if_eq_zero this
+        /// </summary>
+        internal static void IfEqZeroHelper(RenderContext ctx, IList<object> args, IDictionary<string, object> options,
+                                 RenderBlock fn, RenderBlock inverse)
+        {
+            bool isZero = false;
+            double decArg = 0;
+            if (args[0] != null && Double.TryParse(args[0].ToString(), out decArg))
+            {
+                isZero = decArg.Equals(0D);
+            }
+
+            if (isZero)
+            {
+                fn(args[0]);
+            }
+            else
+            {
+                inverse(args[0]);
+            }
+        }
+
+        /// <summary>
+        /// unless_eq_zero this
+        /// </summary>
+        internal static void UnlessEqZeroHelper(RenderContext ctx, IList<object> args, IDictionary<string, object> options,
+                         RenderBlock fn, RenderBlock inverse)
+        {
+            bool isZero = false;
+            double decArg = 0;
+            if (args[0] != null && Double.TryParse(args[0].ToString(), out decArg))
+            {
+                isZero = decArg.Equals(0D);
+            }
+
+            if (isZero)
+            {
+                inverse(args[0]);
+            }
+            else
+            {
+                fn(args[0]);
+                
+            }
         }
 
         /// <summary>
@@ -57,7 +110,7 @@ namespace Blocks.NustacheHelpers
         internal static void UnlessEqHelper(RenderContext ctx, IList<object> args, IDictionary<string, object> options,
                                             RenderBlock fn, RenderBlock inverse)
         {
-            if (args[0].Equals(options["compare"]))
+            if (Object.Equals(args[0],options["compare"]))
                 inverse(args[0]);
             else
                 fn(args[0]);
