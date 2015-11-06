@@ -305,5 +305,93 @@ namespace Blocks.NustacheHelpers.Tests
 
             result.Should().Be("not equal");
         }
+
+        [Test, Category("if_eq_zero")]
+        public void IfEqZeroHelper_renders_expected_with_zero_number()
+        {
+            object one = 0;
+
+            var result = Render.StringToString("{{#if_eq_zero one}}equal{{else}}not equal{{/if_eq_zero}}",
+                                               new { one });
+
+            result.Should().Be("equal");
+        }
+
+        [Test, Category("if_eq_zero")]
+        public void IfEqZeroHelper_renders_expected_with_zero_string()
+        {
+            object one = "0";
+
+            var result = Render.StringToString("{{#if_eq_zero one}}equal{{else}}not equal{{/if_eq_zero}}",
+                                               new { one });
+
+            result.Should().Be("equal");
+        }
+
+        [Test, Category("if_eq_zero")]
+        public void IfEqZeroHelper_renders_inverse_with_null()
+        {
+            object one = null;
+
+            var result = Render.StringToString("{{#if_eq_zero one}}equal{{else}}not equal{{/if_eq_zero}}",
+                                               new { one });
+
+            result.Should().Be("not equal");
+        }
+
+        [Test, Category("if_eq_zero")]
+        public void IfEqZeroHelper_renders_inverse_with_not_zero()
+        {
+            object one = 123123;
+
+            var result = Render.StringToString("{{#if_eq_zero one}}equal{{else}}not equal{{/if_eq_zero}}",
+                                               new { one });
+
+            result.Should().Be("not equal");
+        }
+
+        [Test, Category("unless_eq_zero")]
+        public void UnlessEqZeroHelper_renders_expected_with_zero_number()
+        {
+            object one = 0;
+
+            var result = Render.StringToString("{{#unless_eq_zero one}}equal{{else}}not equal{{/unless_eq_zero}}",
+                                               new { one });
+
+            result.Should().Be("not equal");
+        }
+
+        [Test, Category("unless_eq_zero")]
+        public void UnlessEqZeroHelper_renders_expected_with_zero_string()
+        {
+            object one = "0";
+
+            var result = Render.StringToString("{{#unless_eq_zero one}}equal{{else}}not equal{{/unless_eq_zero}}",
+                                               new { one });
+
+            result.Should().Be("not equal");
+        }
+
+        [Test, Category("unless_eq_zero")]
+        public void UnlessEqZeroHelper_renders_inverse_with_null()
+        {
+            object one = null;
+
+            var result = Render.StringToString("{{#unless_eq_zero one}}equal{{else}}not equal{{/unless_eq_zero}}",
+                                               new { one });
+
+            result.Should().Be("equal");
+        }
+
+        [Test, Category("unless_eq_zero")]
+        public void UnlessEqZeroHelper_renders_inverse_with_not_zero()
+        {
+            object one = 123123;
+
+            var result = Render.StringToString("{{#unless_eq_zero one}}equal{{else}}not equal{{/unless_eq_zero}}",
+                                               new { one });
+
+            result.Should().Be("equal");
+        }
     }
 }
